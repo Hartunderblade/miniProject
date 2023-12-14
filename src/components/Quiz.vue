@@ -83,6 +83,9 @@
             }
             this.quationIndex++;
           },
+
+
+          
             doneAnswer() {
       if (this.selectedOption && this.selectedOption.id === this.currentQuestion.correctOptionId) {
         alert('Правильный ответ');

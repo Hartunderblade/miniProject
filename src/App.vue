@@ -4,15 +4,18 @@
     <!-- <Culc/> -->
   </div>
   <div>
-    <ToDoLists/>
+    <!-- <ToDoLists/> -->
   </div>
   <div>
     <Slider/>
   </div>
   <div>
-    <Convector/>
+    <!-- <Convector/> -->
   </div>
   <div><Quis/></div>
+  <div>
+    <Slider2/>
+  </div>
  
 
     
@@ -25,6 +28,7 @@ import Slider from './components/Slider.vue'
 import ToDoLists from './components/ToDoLists.vue'
 import Convector from './components/Convector.vue'
 import Quis from './components/Quiz.vue'
+import Slider2 from './components/Slider2.vue'
 
 
 export default {
@@ -44,7 +48,8 @@ export default {
       ToDoLists,
       Slider,
       Convector,
-      Quis
+      Quis,
+      Slider2
 		}
 }
 
