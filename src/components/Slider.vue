@@ -111,4 +111,96 @@ img {
   margin: 0 12px;
 }
   </style>
+
+
+<template>
+  <div class="slider">
+    <div class="slider-images">
+      <img v-for="(image, index) in images" :src="image" :key="index" :class="{ active: index === currentImageIndex }">
+    </div>
+    <div class="slider-controls">
+      <button class="prev-button" @click="prevImage">&lt;</button>
+      <span class="current-image">{{ currentImageIndex + 1 }}</span>
+      <span>/</span>
+      <span>{{ images.length }}</span>
+      <button class="next-button" @click="nextImage">&gt;</button>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      currentImageIndex: 0,
+      images: [
+        'path/to/image1.jpg',
+        'path/to/image2.jpg',
+        'path/to/image3.jpg',
+        'path/to/image4.jpg',
+      ],
+    };
+  },
+  methods: {
+    prevImage() {
+      if (this.currentImageIndex > 0) {
+        this.currentImageIndex--;
+      } else {
+        this.currentImageIndex = this.images.length - 1;
+      }
+    },
+    nextImage() {
+      if (this.currentImageIndex < this.images.length - 1) {
+        this.currentImageIndex++;
+      } else {
+        this.currentImageIndex = 0;
+      }
+    },
+  },
+};
+</script>
+
+<style>
+.slider {
+  position: relative;
+  width: 100%;
+}
+
+.slider-images {
+  display: flex;
+  overflow: hidden;
+}
+
+.slider-images img {
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.slider-images img.active {
+  opacity: 1;
+}
+
+.slider-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.slider-controls button {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.slider-controls .current-image {
+  margin: 0 10px;
+}
+</style>
   
