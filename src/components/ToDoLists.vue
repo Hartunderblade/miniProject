@@ -4,26 +4,20 @@
      <div>
         <h2>Сделайте запись</h2>
         <div>
-            <textarea type="text" v-model="newNote" placeholder="Введите текст"/>
+            <input type="text" v-model="newNote" placeholder="Введите текст"/>
             <button type="submit" @click="addNote">Добавить запись</button>
-            <!-- <span v-if="searchQuery === note" style="background-color: yellow">{{ note }}</span> -->
         </div>
-        
-        <div>
-          <input type="text" v-model="searchQuery" placeholder="Поиск">
-          <button @click="search">Найти</button>
-        </div>
-    </div>
-    <div v-for="(note, index) in notes" :key="index">
-          <textarea >{{note}}</textarea>
-          
-          <button @click="deleteNote">Удалить запись</button>
+        <ul>
+          <li v-for="(note, index) in notes" :key="index">
+            <input type="checkbox" v-model="note.completed">
+            <p >{{note.name}}</p>
+            <button @click="done(index)">Изменить</button>
+            <button @click="deleteNote(index)">удалить</button>
+          </li>
+        </ul>
     </div>
   </div>
    
-  
-      
-    
   </template>
   
   <script>
@@ -35,16 +29,16 @@
       return{
         newNote:'',
         notes:[],
-        searchQuery:'',
-        
-  
       }
     },
     methods: {
     
      addNote(){
       if(this.newNote !== ''){
-        this.notes.push(this.newNote);
+        this.notes.push({
+          name: this.newNote,
+          completed: false
+        });
         this.newNote = '';
       }
       
@@ -53,12 +47,9 @@
      deleteNote(index) {
           this.notes.splice(index, 1);
         },
-        search() {
-          // Фильтрация записей по поисковому запросу
-          this.notes = this.notes.filter(note => {
-            return note.content.toLowerCase().includes(this.searchQuery.toLowerCase());
-          });
-          this.searchQuery = '';
+        done(index){
+          this.newNote = this.notes[index].name;
+          this.deleteNote(index);
         }
      
       

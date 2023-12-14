@@ -63,9 +63,6 @@
         solve:'',
         state: true
         
-        
-       
-      
   
       }
     },

@@ -1,5 +1,5 @@
 <template>
-
+<!-- 
     <div class="quiz">
         <h2>{{ currentQuestion.question }}</h2>
   <ul>
@@ -10,6 +10,22 @@
   </ul>
   <button @click="beforeAnswer">Назад</button>
   <button @click="doneAnswer">Далее</button>
+    </div> -->
+
+
+    <div>
+      <h1>Опросник: да или нет</h1>
+      <div v-if="quationIndex < quationsText.length">
+        <h2>{{quationsText[quationIndex].text}}</h2>
+        <div>
+          <button @click="answerQuestion(true)">Да</button>
+          <button @click="answerQuestion(false)">Нет</button>
+        </div>
+      </div>
+      <div v-else>
+        <h2>Вы прошли опросник</h2>
+        <h3>Правильнве ответы: {{numAnswer}}</h3>
+      </div>
     </div>
 
 </template>
@@ -40,6 +56,16 @@
         ],
         correctOptionId: 4
       }
+    ],
+
+    quationIndex: 0,
+    numAnswer: 0,
+
+    quationsText:[
+      {text: 'Вопрос 1: Vue.js - это фреймворк JavaScript?', answer: true},
+      {text: 'Вопрос 2: Vue.js может использоваться для создания одностраничных приложений?', answer: true},
+      {text: 'Вопрос 3: Vue.js разработан компанией Facebook?', answer: true},
+      {text: 'Вопрос 4: Vue.js поддерживает реактивное программирование?', answer: true},
     ]
 
   
@@ -51,6 +77,12 @@
     }
     },
         methods: {
+          answerQuestion(answer){
+            if(answer === this.quationsText[this.quationIndex].answer){
+              this.numAnswer++;
+            }
+            this.quationIndex++;
+          },
             doneAnswer() {
       if (this.selectedOption && this.selectedOption.id === this.currentQuestion.correctOptionId) {
         alert('Правильный ответ');
